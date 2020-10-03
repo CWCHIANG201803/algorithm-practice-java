@@ -1,16 +1,16 @@
 package solution;
 
+import resources.ListNode;
+
 public class Solution {
-    public int[] twoSum(int[] nums, int target) {
-        int N = nums.length;
-        for(int i=0; i<N; ++i){
-            int secondVal = target - nums[i];
-            for(int j=0; j<N; ++j){
-                if(secondVal == nums[j] && secondVal != nums[i]) {
-                    return new int[] {i, j};
-                }
-            }
+    public boolean hasCycle(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast!=null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(fast == slow) return true;
         }
-        return new int[]{};
+        return false;
     }
 }

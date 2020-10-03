@@ -1,26 +1,28 @@
 package solution;
 
+import resources.ListNode;
+import resources.Utility;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import solution.Solution;
-
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SolutionTest {
     @ParameterizedTest
-    @MethodSource("twoSumProvider")
-    void twoSum(int[] nums, int target, int[] expected) {
-        Solution sol1 = new Solution();
-        assertArrayEquals(expected, sol1.twoSum(nums,target));
+    @MethodSource("hasCycleProvider")
+    void hasCycle(String input, int pos, boolean expect) {
+        Utility utility = new Utility();
+        Solution sol = new Solution();
+        ListNode inputLinkedList = utility.stringToCircularList(input,pos);
+        assertEquals(expect,sol.hasCycle(inputLinkedList));
     }
-    private static Stream twoSumProvider() {
+    private static Stream hasCycleProvider() {
         return Stream.of(
-                Arguments.of(new int[]{2,7,11,15},9, new int[]{0,1}),
-                Arguments.of(new int[]{2,7,11,15},13, new int[]{0,2}),
-                Arguments.of(new int[]{1,4,5,7},11, new int[]{1,3})
+                Arguments.of("[3,2,0,-4,7,8]", 2, true),
+                Arguments.of("[1,2]",0, true),
+                Arguments.of("[2,3,0,4]",3,true),
+                Arguments.of("[2,3,0,4]",-1,false)
         );
     }
 }
