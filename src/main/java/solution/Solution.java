@@ -1,16 +1,22 @@
 package solution;
 
+import resources.TreeNode;
+
 public class Solution {
-    public int[] twoSum(int[] nums, int target) {
-        int N = nums.length;
-        for(int i=0; i<N; ++i){
-            int secondVal = target - nums[i];
-            for(int j=0; j<N; ++j){
-                if(secondVal == nums[j] && secondVal != nums[i]) {
-                    return new int[] {i, j};
-                }
-            }
-        }
-        return new int[]{};
+    public boolean isSymmetric(TreeNode root) {
+        if(root==null)
+            return true;
+
+        return isSymmetric(root.left, root.right);
+    }
+
+    private boolean isSymmetric(TreeNode left, TreeNode right){
+        if(left==null && right ==null)
+            return true;
+
+        if (left!=null && right==null || left==null && right!=null || left.val != right.val)
+            return false;
+
+        return isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left);
     }
 }
