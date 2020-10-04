@@ -1,7 +1,7 @@
 package resources;
 
 public class Utility {
-    public static int[] stringToIntegerArray(String input) {
+    private static int[] stringToIntegerArray(String input) {
         input = input.trim();
         input = input.substring(1, input.length() - 1);
         if (input.length() == 0) {
@@ -30,7 +30,7 @@ public class Utility {
         }
         return dummyRoot.next;
     }
-    public ListNode stringToCircularList(String input, int pos) {
+    public static ListNode stringToCircularList(String input, int pos) {
         int[] array = stringToIntegerArray(input);
 
         if(pos < 0) return stringToListNode(input);
@@ -64,6 +64,24 @@ public class Utility {
         }
         head = q;
         return head;
+    }
+
+    // excerpted from LeetCode
+    public static String listNodeToString(ListNode node) {
+        StringBuilder out = new StringBuilder();
+        String token = "";
+        out.append("[");
+        while (node != null && node.next != null) {
+            out.append(token).append(node.val);
+            token = ",";
+            node = node.next;
+        }
+
+        if (node != null) {
+            out.append(node.val);
+        }
+        out.append("]");
+        return out.toString();
     }
 
 }
